@@ -14,7 +14,7 @@ All people, organizations and events in the cases are fictional.
 
 No installation is needed.
 
-1. On this repository page, click the green **Code** button, then **Download ZIP**.
+1. On this repository page, click the **Code** button, then **Download ZIP**.
 2. Unzip the downloaded file.
 3. Open the folder and double-click **index.html**. It opens in your web browser.
 
