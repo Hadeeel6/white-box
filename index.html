@@ -939,6 +939,13 @@ img.fig{object-fit:contain;border-radius:50%}
 .l6.dark .tog.on{border-color:var(--tang)}.l6.dark .tog.on .sw{background:var(--tang)}
 .l6.dark .tog .sw{background:#3B4258}
 
+/* visible test-mode switch */
+.tmsw{display:flex;align-items:center;gap:10px;width:calc(100% - 16px);margin:0 8px 6px;padding:8px 10px;border-radius:10px;border:1px dashed #D6CFBF;background:#fff;font-size:13px;font-weight:600;color:var(--ink2);text-align:left}
+.tmsw:hover{border-color:var(--ink)}.tmsw.on{border-style:solid;border-color:#E0A100;background:#FFF8E2;color:#8A5A00}.tmsw.on .sw{background:#E0A100}
+.tmstrip{padding:10px 16px 0}.tmstrip .tmsw{margin:0;width:auto}
+@media (max-width:720px){.tmstrip.show-sm{display:block}}
+.tmsw .sw.sm i{width:12px;height:12px;top:3px;left:3px}.tmsw.on .sw.sm i{left:17px}
+
 .linkbtn{background:none;border:0;padding:0;color:var(--blue-d);font:inherit;text-decoration:underline;cursor:pointer}
 del.anim{animation:strike .6s ease-out both}@keyframes strike{from{text-decoration-color:transparent;color:var(--ink)}to{text-decoration-color:var(--red);color:#9AA1AE}}
 ins.anim{animation:insIn .5s .35s ease-out both}@keyframes insIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
@@ -1646,7 +1653,7 @@ const MISSIONS=[
    blurb:'A fake video of a classmate spreads in your group chat.'}
 ];
 const MS=n=>S.ms[n]||(S.ms[n]={lesson:false,case:false,reflect:false});
-function msUnlocked(n){if(S.unlockAll)return true;if(n===1)return S.board.length>=3||!!S.campDone||MS(1).lesson||MS(1).case;return MS(n-1).reflect}
+function msUnlocked(n){if(S.unlockAll)return true;if(n===1)return true;return MS(n-1).reflect}
 function msParts(n){const m=MS(n);return [m.lesson,m.case,m.reflect].filter(Boolean).length}
 function msOfCase(c){return MISSIONS.find(m=>m.case===c)}
 function msOfLesson(l){return MISSIONS.find(m=>m.lesson===l)}
@@ -1675,7 +1682,7 @@ function shell(inner){const cur=navSection(S.screen);
   return `<div class="shell"><aside class="side" aria-label="Main navigation">
     <button class="logo" data-act="go" data-arg="home" aria-label="White Box home"><span class="logo-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7zM12 12l9-5M12 12v10M12 12L3 7"/></svg></span><span>White Box</span></button>
     <nav class="navlist">${items}</nav>
-    <div class="side-foot">${S.unlockAll?'<span class="tmpill">Test mode on</span>':''}<button class="me" data-act="go" data-arg="settings" aria-label="Settings">${FIGS.you.replace('class="fig"','width="36" height="36"')}<div style="flex:1;min-width:0"><strong>${esc(S.name||'Student')}</strong><span>${lvl().name} · ${S.cred} XP</span><i class="xpbar"><b style="width:${lvl().pct}%"></b></i></div><span class="gear ${S.screen==='settings'?'on':''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span></button></div>
+    <div class="side-foot"><button class="tmsw ${S.unlockAll?'on':''}" data-act="toggleUnlock" role="switch" aria-checked="${!!S.unlockAll}"><span class="sw sm"><i></i></span><span>Test mode${S.unlockAll?' · on':''}</span></button><button class="me" data-act="go" data-arg="settings" aria-label="Settings">${FIGS.you.replace('class="fig"','width="36" height="36"')}<div style="flex:1;min-width:0"><strong>${esc(S.name||'Student')}</strong><span>${lvl().name} · ${S.cred} XP</span><i class="xpbar"><b style="width:${lvl().pct}%"></b></i></div><span class="gear ${S.screen==='settings'?'on':''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span></button></div>
   </aside><div class="content">${inner}</div></div>`}
 function pageHead(title,sub,crumb){return `<header class="phead">${crumb?`<button class="crumb" data-act="go" data-arg="${crumb[0]}">← ${crumb[1]}</button>`:''}${title?`<h1 class="ptitle">${title}</h1>`:''}${sub?`<p class="psub">${sub}</p>`:''}</header>`}
 
@@ -1683,10 +1690,10 @@ function pageHead(title,sub,crumb){return `<header class="phead">${crumb?`<butto
 function home(){
   const nv=S.board.length;const needVals=nv<3&&!S.campDone&&!S.unlockAll;
   const cur=curMission();
-  const next=needVals?{t:'Choose your values',s:`Pick at least 3 values that matter to you. They unlock your first mission. (${nv} of 3)`,b:'Explore values',a:'values'}
+  const next=needVals?{t:'Choose your values',s:`Pick at least 3 values that matter to you. You’ll test them in every mission. (${nv} of 3)`,b:'Explore values',a:'values'}
     :cur?{t:`Mission ${cur.n}: ${cur.title}`,s:!MS(cur.n).lesson?`Start with the lesson: ${cur.lname}.`:!MS(cur.n).case?'Lesson done. Now solve the case.':'Case solved. Reflect on your values to finish.',b:!MS(cur.n).lesson?'Start lesson':!MS(cur.n).case?'Open case':'Reflect',a:!MS(cur.n).lesson?cur.lesson:!MS(cur.n).case?'case:'+cur.case:'reflect/'+cur.n}
     :{t:'All missions complete',s:'You finished every mission. Revisit any of them, or update your guide.',b:'Open my guide',a:'guide'};
-  return `<main class="pg">
+  return `<div class="tmstrip show-sm"><button class="tmsw ${S.unlockAll?'on':''}" data-act="toggleUnlock" role="switch" aria-checked="${!!S.unlockAll}"><span class="sw sm"><i></i></span><span>Test mode: unlock everything${S.unlockAll?' · on':''}</span></button></div><main class="pg">
     <section class="hero">
       <div class="stack" style="gap:12px;flex:1 1 320px">
         <h1 class="ptitle" style="font-size:clamp(32px,4.4vw,46px)">${S.name?'Welcome back, '+esc(S.name):'Welcome to White Box'}</h1>
@@ -1704,7 +1711,7 @@ function home(){
   </main>`}
 function nextCard(needVals,cur){
   const parts=(n)=>{const st=MS(n);return [['Lesson',st.lesson],['Case',st.case],['Reflect',st.reflect]]};
-  if(needVals){const nv=S.board.length;return `<div class="nextcard"><div class="nc-art"><img src="assets/camp.webp" alt=""></div><div class="nc-body"><span class="nc-tag">Up next · Values Camp</span><strong class="nc-title">Choose your values</strong><span class="nc-sub">Save 3 values to unlock your first mission.</span>
+  if(needVals){const nv=S.board.length;return `<div class="nextcard"><div class="nc-art"><img src="assets/camp.webp" alt=""></div><div class="nc-body"><span class="nc-tag">Up next · Values Camp</span><strong class="nc-title">Choose your values</strong><span class="nc-sub">Save 3 values. You’ll test them in every mission.</span>
     <div class="nc-steps">${[0,1,2].map(i=>`<span class="${i<nv?'on':''}">${i<nv?'✓':i+1}</span>`).join('')}<em>${nv} of 3 saved</em></div><button class="btn btn-primary" data-act="go" data-arg="values">Explore values →</button></div></div>`}
   if(!cur)return `<div class="nextcard"><div class="nc-art"><img src="assets/b_trophy.webp" alt=""></div><div class="nc-body"><span class="nc-tag">All done</span><strong class="nc-title">Every mission complete</strong><span class="nc-sub">Revisit any mission, or look back at how your values changed.</span><button class="btn btn-primary" data-act="go" data-arg="journey">See my journey →</button></div></div>`;
   const st=MS(cur.n);const ps=parts(cur.n);const i=ps.findIndex(p=>!p[1]);
@@ -1772,7 +1779,7 @@ function value(){
   </main>`}
 ACT.saveValue=k=>{const D=S.vdraft[k];if(!D||D.me.trim().length<3||D.ai.trim().length<3){S.vwarn=k;render();return}S.vwarn=null;
   const ex=S.board.find(b=>b.k===k);if(ex){ex.me=D.me.trim();ex.ai=D.ai.trim()}else if(S.board.length<5){S.board.push({k,me:D.me.trim(),ai:D.ai.trim()});S.cred+=5}
-  if(!ex&&S.board.length>=3&&!S.campDone){S.campDone=true;S.modal={icon:'⛺',kicker:'Values Camp complete · +15 XP',title:'Mission 1 unlocked',body:'Your values are saved. After each case you’ll test them against a real decision.',cta:['Start Mission 1','mission/1'],sec:['Add more values','values']};go('home');return}
+  if(!ex&&S.board.length>=3&&!S.campDone){S.campDone=true;S.modal={icon:'⛺',kicker:'Values Camp complete · +15 XP',title:'Your values are saved',body:'After each case you’ll test them against a real decision. Mission 1 is ready.',cta:['Start Mission 1','mission/1'],sec:['Add more values','values']};go('home');return}
   S.toast=ex?`${VALUES[k].name} updated`:`${VALUES[k].name} saved to your board`;go(ex?'guide':'values')};
 function guide(){
   const B=S.board;

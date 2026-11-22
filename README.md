@@ -27,7 +27,7 @@ Keep `index.html` and the `assets` folder together in the same folder, or the im
 ## Good to know
 
 - **Progress** is saved in your own browser on your own computer. Nothing is sent anywhere. To start over, open **Settings** (click your name at the bottom of the sidebar) and choose **Reset everything**.
-- **Test mode:** in Settings, turn on **Unlock everything** to open every mission, lesson and case without playing in order. This is useful for teachers and reviewers.
+- **Test mode:** use the **Test mode** switch in the sidebar (on phones, at the top of the Map), or **Unlock everything** in Settings, to open every mission, lesson and case without playing in order. This is useful for teachers and reviewers. Mission 1, its lesson and its case are always open.
 - **Chatting with characters:** you can type your own questions to the case characters. In this downloaded version they reply with scripted answers.
 - Works best in a recent version of Chrome, Edge, Safari or Firefox, on a laptop or a phone.
 
