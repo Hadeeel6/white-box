@@ -2,6 +2,8 @@
 
 A values-guided AI ethics learning platform for 10th graders.
 
+**Try it online:** https://hadeeel6.github.io/white-box/
+
 Students choose their values, then play through three missions. Each mission has:
 
 1. **A lesson** on how AI works: how a chatbot picks words, how AI learns from examples, how image AI makes pictures.
@@ -12,7 +14,9 @@ All people, organizations and events in the cases are fictional.
 
 ## How to open it
 
-No installation is needed.
+The easiest way is the link above. It works on a laptop or a phone, with no sign-in.
+
+To use it offline instead:
 
 1. On this repository page, click the **Code** button, then **Download ZIP**.
 2. Unzip the downloaded file.
