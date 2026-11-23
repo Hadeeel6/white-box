@@ -1,0 +1,208 @@
+<html><body style="font-family:Arial"><h2>Interface Prototype</h2>
+<h3>Prototyping method and scope</h3>
+<p>We built White Box as a high-fidelity, interactive web prototype that runs in any browser on a laptop or phone, with no sign-in. We chose a coded prototype over static Figma screens because the core of our design is interaction with AI: students need to type questions to a chatbot, train a model, toggle the inputs of a hiring tool and watch the results change. A clickable mockup could show these screens, but it could not show how the system responds. Before building, we sketched user journeys for our two personas, compared several visual directions on a shared FigJam board, and prototyped the Values Studio separately as a smaller web prototype. The final prototype brings these pieces together into one platform.</p>
+<p>For this stage, we scoped the prototype to our grade 10 persona, Sarah. It contains the full student experience for three missions, one for each of our grade 10 topics: trust and hallucinations, bias and fairness, and deepfakes and consent. The grade 3 version for Maya and the teacher and parent views from our conceptual design are not part of this prototype and remain future work. All people, organizations and events in the cases are fictional, and every case screen says so.</p>
+<p>The prototype is available at https://hadeeel6.github.io/white-box/ (code: https://github.com/Hadeeel6/white-box). Progress is saved in the student's own browser, and nothing is sent to a server.</p>
+<h3>Platform structure: the map and missions</h3>
+<p>White Box is organized around a learning map (Figure 1). Students start at Values Camp, where they choose the values they want to bring into their AI use, and then move through three missions. Each mission is one repeating unit made of three parts: a short lesson on how a type of AI works, a case where that AI goes wrong, and a reflection where students check and update their values. The three dots under each stop on the map show these three parts, so students can see at a glance what they have finished. A mission unlocks once the previous one is complete, following the Duolingo-style learning path from our conceptual design.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig01_map.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 1.</b> The learning map. Each stop is a mission; the three dots under it track the lesson, case and reflection. The "Up next" card tells the student what to do next.</i></p>
+
+<p>Each mission has its own page (Figure 4) that lists its three parts with an estimated time (about 8 minutes for the lesson, 20 for the case and 5 for the reflection) and the two values the mission puts in tension. Lessons and cases can also be opened directly from the Lessons and Cases pages in the sidebar, so a teacher can assign one part on its own. We kept the navigation the same on every page: a sidebar with Map, Values Studio, Lessons, Cases, My Guide and Journey, and a progress bar at the top of every lesson and case that shows the current step (for example, "Research · 2 of 5").</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig04_mission.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 4.</b> A mission page. The mission's two values are shown as tags, and its three parts are listed with estimated times.</i></p>
+
+<h3>Values Studio and My Guide</h3>
+<p>The Values Studio (Figure 2) is where each student defines what matters to them before they meet any AI. It presents six values: honesty, independence, fairness, privacy, respect and responsibility. Each value has its own color, an illustrated icon, a one-line definition and an example of what it looks like when using AI. We made these choices because values such as fairness, independence and responsibility are hard to tell apart when shown only as abstract words, and multiple visual cues help students recognize the same value when it reappears in a case. When a student opens a value (Figure 3), they see an example of it in AI use and a prompt to think about, and they write in their own words what the value means to them and how it will guide their AI use. We used open-ended questions such as "What does honesty mean to you?" rather than quiz questions, and we never score a student's values.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig02_values.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 2.</b> The Values Studio. Students pick three to five values to carry through the missions.</i></p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig03_value_detail.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 3.</b> Defining a value. The left card shows the value in an AI situation; the right side asks the student to define it and turn it into a guideline for their own AI use.</i></p>
+
+<p>The values a student saves appear on their values board in My Guide (Figure 15), ranked from most to least important, each with "What it means to me" and "How I want to use AI." Students can reorder, edit or remove values at any time, and the reflection at the end of each mission can update the board. The guide is the main thing a student takes away from White Box: a personal AI-use policy written in their own words.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig15_my_guide.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 15.</b> My Guide. The values board holds each value's personal meaning and the guideline the student wrote for their AI use.</i></p>
+
+<h3>Lessons: how AI works</h3>
+<p>Each mission opens with a short, hands-on lesson that shows how a type of AI works before students see it fail. Following the AI Exploration Lessons in our conceptual design, every lesson follows the same rhythm: the student first guesses, then tries something, sees the result, and gets a one-line takeaway. Lessons use a dark "lab" panel to set them apart from the story-based cases.</p>
+<ul>
+<li><strong>Lesson 1, Next word (Figure 5).</strong> The student plays the chatbot and picks the next word in "After school, I like to eat ___," then sees how a chatbot scores the options. They ask the chatbot the same question five times and see that it picks with a bit of chance, tap a word to see how it "looks back" at earlier words, and finally ask it about a place that does not exist. The chatbot still answers confidently, which introduces hallucination.</li>
+<li><strong>Lesson 2, Learn from examples (Figure 6).</strong> The student trains a tiny fruit sorter on labeled red apples and oranges, then tests it on a green apple and a tomato it has never seen. The model learned "red means apple," so it gets both wrong. Adding better examples fixes it, showing that an AI learns whatever pattern its examples contain, including ones nobody meant to teach.</li>
+<li><strong>Lesson 3, Picture from noise (Figure 7).</strong> The student watches an image form step by step from random noise, guided by a prompt, and changes the prompt and the random seed to see how the result changes. This explains how image and video AI can create a convincing picture of something that never happened.</li>
+</ul>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig05_lesson1.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 5.</b> Lesson 1. After guessing the next word, the student sees how a chatbot scores the possible words.</i></p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig06_lesson2.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 6.</b> Lesson 2. The student trains a fruit sorter on labeled examples and tests it on fruit it has never seen.</i></p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig07_lesson3.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 7.</b> Lesson 3. An image forms from noise, step by step, guided by the prompt.</i></p>
+
+<h3>Cases: AI going wrong</h3>
+<p>Each case puts the student in a realistic situation where an AI tool has caused, or is about to cause, harm. The student researches, checks the evidence and decides what to do. Every case follows the same structure as the scenario beats in our conceptual design: an intro that previews the AI concept, a brief that sets up the situation and its pressure, an investigation, a decision and a final step.</p>
+<p><strong>Case 1, The Confident Liar (trust and hallucinations).</strong> The student is a fact-checker at a fictional school newspaper. Nova, the paper's AI, has written a profile of the town's first mayor that is due to print that night. The student interviews Nova in a chat (Figure 8), where every answer can be added to their notes, and a checklist shows what the editor still needs. They then verify the draft (Figure 9): they tap every name, date, quote and source to flag it, then check each claim against sources in a simulated web browser and mark it as confirmed, wrong or unconfirmable. They discover that Nova got the year wrong, made up a quote and cited a book that does not exist. In the decision step, the fake quote has already spread online, and the student talks to the editor and to the mayor's family before choosing what the paper should do. Each option lists what it helps and what it costs. The case ends in the Prompt Studio (Figure 10), where the student rewrites the prompt that produced the draft, adding a role, the checked facts, the task, rules and a format, and sees how each ingredient changes Nova's next draft.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig08_case1_chat.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 8.</b> Case 1, Research. The student interviews Nova; the "Sam needs" checklist tracks what the editor asked for.</i></p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig09_case1_verify.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 9.</b> Case 1, Verify. The student flags every checkable fact in Nova's draft, then checks each one in a simulated browser.</i></p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig10_case1_prompt_studio.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 10.</b> Case 1, Prompt Studio. Color coding shows which part of the prompt shaped each sentence of Nova's draft.</i></p>
+
+<p><strong>Case 2, The Shortlist (bias and fairness).</strong> An AI called RankRight has ranked 400 teens for 60 summer jobs, and only 5 of the 60 picks come from Eastside, where one in three applicants lives. The student sits on the youth board that has to approve the list. To audit the tool (Figure 11), they swap one detail of an applicant's file at a time (ZIP code, school, after-school activity, work, essay), predict how the score will change, and then check. They can ask RankRight to explain its scores, but, like many real tools, it describes its rules without mentioning the problem. After hearing from the program director and an applicant, they recommend a decision. In the final step (Figure 12), they choose which inputs RankRight may use and try to bring the result into a fair range while keeping the tool accurate. If they remove ZIP code but leave commute time, the tool leans on commute time instead, which shows how a proxy can carry the same bias.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig11_case2_audit.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 11.</b> Case 2, Test. The student swaps one detail of an applicant's file at a time and watches the score change.</i></p>
+
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig12_case2_fix.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 12.</b> Case 2, Fix it. The student switches RankRight's inputs on and off to reach a fair and accurate result.</i></p>
+
+<p><strong>Case 3, Not Me (deepfakes and consent).</strong> A video of a classmate, Jordan, seeming to admit to cheating is spreading in the class group chat, and a friend asks the student to repost it. Jordan says it is not her. The student investigates six leads (Figure 13): tracing who posted it first, looking for glitches, running an online AI detector, reading a message from another classmate, searching for the original video and asking an AI to compare the two. For each lead, they rate whether it proves the video is fake, points to fake, proves nothing or points to real, and only after rating every lead can they decide. The case is designed so that the AI detector says the video is only 12% likely to be AI-made, and the real proof comes from finding the original video. Finally, the student decides how to respond while respecting Jordan's wishes, since every repost, even one defending her, shows her face again.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig13_case3_investigate.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 13.</b> Case 3, Investigate. Each lead is rated for how strongly it shows the video is fake; the verdict unlocks only after every lead is rated.</i></p>
+
+<h3>Reflection</h3>
+<p>Each mission ends with a four-step reflection: Identify, Tension, Rank and Reflect. The student picks which values mattered in the case, then sees the two values the mission set against each other (Figure 14). In Mission 1, for example, honesty asks "What can you print if you can't prove it?" while responsibility asks "The fake quote already spread. What do you owe the people it hurt?" The student explains how they balanced them, re-ranks their values and can update a guideline on their board. There are no right answers in the reflection, and it is never scored.</p>
+<p style="text-align:center"><img src="https://raw.githubusercontent.com/Hadeeel6/white-box/report-screenshots/screenshots/fig14_reflect.jpg" width="600"></p>
+<p style="text-align:center"><i><b>Figure 14.</b> Reflection, Tension step. The two values the case put in conflict are shown side by side.</i></p>
+
+<h3>Design decisions</h3>
+<p>Our visual and interaction choices followed a few principles from our conceptual design:</p>
+<ul>
+<li><strong>Gamified but not childish.</strong> Our persona Sarah is 15 and tunes out lessons that feel preachy or babyish. We used a clean, mostly neutral interface with rounded cards and simple illustrated characters, and kept color for meaning: each value has one color used everywhere it appears.</li>
+<li><strong>One thing at a time.</strong> Each case is split into short steps with a visible progress bar, so students focus on one question at a time.</li>
+<li><strong>No right answer on values.</strong> Decision options show both what they help and what they cost, and we used action labels and open questions instead of evaluative language.</li>
+<li><strong>AI is always labeled.</strong> AI messages are marked as AI (for example, "AI CHATBOT"), AI characters such as Nova and RankRight are presented as tools in the story, and lessons cite their sources (for example, OpenAI's 2025 explanation of why language models hallucinate).</li>
+<li><strong>Calibrated trust, not blanket distrust.</strong> Students check the AI rather than reject it. In Case 3, the most useful step is using an AI comparison tool on the original video, while the AI detector turns out to be unreliable.</li>
+</ul>
+<h2>Human-AI Interaction</h2>
+<p>White Box interacts with AI in two ways: a live large language model that plays the characters in each case, and a set of small, transparent model simulations in the lessons and cases. Both are built into the same web app as the interface, so the AI portion and the user interface are integrated rather than shown separately.</p>
+<h3>AI Cases</h3>
+<p><strong>Live character conversations.</strong> In every case, students can ask the characters their own questions in addition to the suggested ones. When the prototype runs where a model is available (we used Anthropic's Claude), each typed question is sent to the LLM with a prompt built from four parts:</p>
+<ol>
+<li>Fixed rules for every character: stay in character; reply in one to three short sentences of plain text; use only the facts provided; if the character would not know something, say so instead of inventing it; never tell the student which decision to make; keep it school-appropriate; and bring off-topic questions back to the case.</li>
+<li>The character's role and the case summary.</li>
+<li>The character's scripted question-and-answer pairs, which serve as the only facts the model may use.</li>
+<li>The conversation so far and the student's new question.</li>
+</ol>
+<p>AI tool characters, such as Nova in Case 1 and RankRight in Case 2, receive one extra instruction: answer the way that tool would, confidently and briefly, and, like many real AI tools, describe its own rules without revealing problems nobody asked about directly. This is a deliberate design choice. It lets students experience a confident AI that is not volunteering its flaws, which is exactly the behavior the cases ask them to notice.</p>
+<p>Grounding the model in scripted facts addresses a risk we identified in our conceptual design: AI role-play can lose consistency and invent details (Mollick et al., 2024). By limiting each character to facts the team wrote, the planted errors, such as Nova's wrong year and made-up quote, stay exactly where we placed them, and the case remains solvable. If no model is available, or the request fails, the character falls back to a scripted reply. This means the downloadable version works offline and in classrooms without AI access, the same way our conceptual design's Scripted tier serves younger students.</p>
+<p><strong>Rule-based models inside the cases.</strong> The other AI behavior in the cases is computed by transparent rules, so the outcome of each student action is predictable and explainable:</p>
+<ul>
+<li><strong>Prompt Studio (Case 1)</strong> analyzes the student's prompt sentence by sentence and detects five ingredients: role, task, context, rules and format. It then checks whether the prompt includes the facts the student verified (the correct year of 1974), tells Nova not to use the unconfirmed quote and rules out the non-existent book. Nova's new draft is assembled from these checks, and each sentence is color-coded to the ingredient that shaped it. The output teaches that a prompt with checked facts and clear rules produces a more trustworthy draft, without claiming that prompting alone prevents hallucination.</li>
+<li><strong>RankRight (Case 2)</strong> is a scoring model with six inputs that the student can switch on or off: ZIP code, school name, team sports, commute time, job experience and essay score, plus an optional new rule that counts caregiving as experience. For each combination, it outputs the number of Eastside applicants in the top 60, an accuracy estimate and an impact ratio comparing Eastside's selection rate with everyone else's. A result counts as fair when the ratio is at least 0.8 (the "four-fifths" guideline used in U.S. hiring) and accuracy stays at 70% or higher. If ZIP code is removed while commute time stays on, the model's weight on commute time triples, which demonstrates proxy discrimination. Removing real signals such as work history and essays lowers accuracy below 70%, which shows that dropping data is not automatically fair either.</li>
+<li><strong>Evidence rating (Case 3)</strong> uses a decision table that maps each of the six leads to the ratings it supports. The original video "proves" the fake, the AI comparison "proves" or "points to" it, the anonymous account "points to" it, and the AI detector and the classmate's rumor "prove nothing." Each rating returns a short explanation of why, for example: "Detectors miss new fakes all the time."</li>
+</ul>
+<h3>LLM Interactive Lessons</h3>
+<p>The three lessons are proofs of concept of how each type of AI works, built as small simulations rather than calls to a real model. We chose simulations so that students can see inside the model, which a real system would hide. This follows Long and Magerko's (2020) recommendation to explain AI through visualizations and interactive demonstrations that reveal components gradually.</p>
+<ul>
+<li><strong>Next-word prediction (Lesson 1).</strong> For a given sentence, the lesson holds a probability for each candidate next word and shows them as bars. When the student asks the chatbot again, it samples from these probabilities, so the most likely word wins most of the time but not always. A second step shows attention: the student taps the word that "it" refers to and sees which earlier word the model weighs most. The last step asks about a place that does not exist and shows that, without real information, the model still produces confident-looking options, while turning on a setting that rewards "I don't know" shifts the top answer to "not a real place." This mirrors OpenAI's (2025) explanation that models are rewarded for guessing rather than admitting uncertainty.</li>
+<li><strong>Learning from examples (Lesson 2).</strong> This is a small classifier in the spirit of Teachable Machine. During training, it runs 12 rounds, and in each round it guesses, checks the label and adjusts the strength of four rules (red means apple, orange color means orange, has a stem means apple, round), with the training mistakes shrinking on screen. Because all the training apples are red, it leans on color; tested on a green apple and a tomato, it predicts each with a confidence percentage and gets both wrong. When the student adds green apples and tomatoes to the training set, it shifts weight to the stem rule and sorts all four correctly.</li>
+<li><strong>Image generation (Lesson 3).</strong> A simplified diffusion model starts from a grid of random noise and removes noise step by step toward the image described by the prompt. Students can change prompt words and the random seed and see that the same prompt with a new seed gives a different picture. A short note explains that real models learn to undo noise by watching millions of pictures get buried in it.</li>
+</ul>
+<p>Each lesson ends with a one-sentence takeaway that links to the case that follows. For example, Lesson 2's takeaway is: "AI learns rules from examples, including the wrong ones. If the examples are lopsided, the rules are too."</p>
+<h2>Evaluation Method</h2>
+<p>We evaluated the prototype in two ways.</p>
+<p><strong>Heuristic evaluation.</strong> We evaluated the integrated prototype against Nielsen's (1994) ten usability heuristics. We walked through the full experience as our persona Sarah, from Values Camp through Mission 1 (lesson, case and reflection), then through the lessons and cases of Missions 2 and 3 using the prototype's test mode. We checked both the public version, where characters reply with scripted answers, and the version with live AI replies. We also checked the prototype against the design commitments in our conceptual design report, such as no scoring of values, clearly labeled AI and privacy protections for free-text input. Each problem was given a severity rating from 1 (cosmetic) to 4 (critical), following Nielsen's scale.</p>
+<p><strong>Student walkthrough.</strong> For the Values Studio, we consulted a grade 10 student to check whether the interface language, visuals and activities were understandable and appropriate for the intended age group. The walkthrough focused on whether the student could identify the meaning of each value card, understand what each button would do and follow the ethical dilemma activities without extra explanation. We were especially interested in whether the reflection questions encouraged students to consider different perspectives rather than look for one correct answer. This was an informal evaluation with one participant, so it does not measure usability across age groups, but it let us see the design from a student's point of view.</p>
+<h2>Evaluation Findings</h2>
+<p>Overall, the prototype did well on several heuristics. Progress is always visible (the step bar in every case, the dots on the map and the Journey page). The cases match real-world situations students recognize: a newsroom, a job application and a group chat. Suggested questions ("Stuck? Try:"), a notes panel and a checklist of what the editor needs support recognition rather than recall. Mistakes are handled well: wrong answers come with an explanation of why, the Case 3 verdict stays locked until every lead has been rated, and "Reset everything" asks for confirmation.</p>
+<p>We found the following problems:</p>
+<table border="1" style="border-collapse:collapse">
+<thead>
+<tr>
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Problem</th>
+<th style="text-align: left;">Heuristic</th>
+<th style="text-align: left;">Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">There is no welcome or onboarding. A new student lands on the map without an explanation of what a mission is, that each one has three parts, what the XP and levels mean, or that the cases are fictional (that note is only in small text at the bottom of each case).</td>
+<td style="text-align: left;">Help and documentation</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">In the public version, typed questions get scripted replies without any sign that they are scripted. When a student asks something new, the character may give a generic answer ("Good question. What matters most to you here?"), which can feel broken.</td>
+<td style="text-align: left;">Visibility of system status</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">The live chat sends free text to an LLM with no privacy filter and no "report this" button, both of which our conceptual design promised for the Live tier. A student could type personal information into the chat.</td>
+<td style="text-align: left;">Error prevention</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">The XP, levels and ranks (for example, "Level 2 · 85 XP," "Critical User") conflict with our conceptual design's promise of no points and could make students feel the activities are graded.</td>
+<td style="text-align: left;">Match with design goals; consistency</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">The test mode switch is visible to every student in the sidebar, so a student can unlock everything and skip the intended order.</td>
+<td style="text-align: left;">User control and freedom</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Some steps are dense. The Verify screen shows the draft, sources, a browser and the verdict buttons at once, and key instructions such as "Tap every name, number, date, quote and source" are in small gray text that is easy to miss.</td>
+<td style="text-align: left;">Aesthetic and minimalist design</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Students' chosen values do not appear during the case itself. They come back only at the reflection, so students must remember them while making the decision the values are meant to guide.</td>
+<td style="text-align: left;">Recognition rather than recall</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">The Case 2 "Fix it" goal ("Get Eastside into the fair zone without breaking the tool") relies on terms such as the impact ratio and 70% accuracy that the lesson does not explain.</td>
+<td style="text-align: left;">Match between system and real world</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Nova has a name and a face, while our conceptual design said the AI helper would have no name, face or memory. Nova is meant to be an AI tool inside the story, not the student's own helper, but the prototype does not make that difference explicit.</td>
+<td style="text-align: left;">Consistency and standards</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">Lessons use a dark "lab" panel and cases use light cards. The switch is intentional but is not explained, and the two have slightly different step layouts.</td>
+<td style="text-align: left;">Consistency and standards</td>
+<td style="text-align: left;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The student walkthrough of the Values Studio pointed to three further issues: students need clearer guidance when they are unsure how to define a value, the link between their case reflections and their Values Guide should be more visible, and students should be able to return to previous screens without losing what they wrote.</p>
+<h2>Recommendations</h2>
+<p>An improvement we would add to the platform is a welcome screen that explains how the lessons work, learning expectations, and what happens when lessons are completed. We want students to feel empowered when interacting with our platform, and we believe better instruction before entering would allow them to do so. Based on our evaluation, we recommend the following changes, in order of priority:</p>
+<ol>
+<li><strong>Add a short welcome tour (finding 1).</strong> In three screens, explain the lesson-case-reflect loop, that values are never graded, that the cases are fictional, and what the student will leave with (their guide).</li>
+<li><strong>Make scripted replies visible (finding 2).</strong> In the scripted version, label typed-question replies as pre-written and steer students toward the suggested questions. When the model is live, show a small "Live AI" label.</li>
+<li><strong>Add the privacy and safety layer from our conceptual design (finding 3).</strong> Filter names, addresses and phone numbers before any text reaches the LLM, add a "report this" button that switches the case to its scripted version, and only enable live replies when a teacher turns them on.</li>
+<li><strong>Replace XP and ranks with non-competitive progress (finding 4).</strong> Use completion stamps tied to skills (for example, "Verify before you trust") instead of points, so nothing suggests the ethical activities are scored.</li>
+<li><strong>Move test mode to a teacher or reviewer setting (finding 5)</strong>, hidden from students.</li>
+<li><strong>Simplify dense steps (finding 6).</strong> Break Verify into flag, then check, with one panel at a time, and raise the contrast and size of instruction text.</li>
+<li><strong>Bring values into the case (finding 7).</strong> Show the student's top values as tags on the Decide step and ask which one their choice reflects.</li>
+<li><strong>Explain the fairness measures (finding 8)</strong> with a short "What is the fair zone?" note before the Fix it step.</li>
+<li><strong>Clarify Nova's role (finding 9)</strong> by labeling Nova as "the newspaper's AI tool" in every case, and reserve a separate, unnamed helper panel for any future AI support given to the student.</li>
+<li><strong>Support defining values (walkthrough findings).</strong> Offer sentence starters and examples when a student is unsure, show a "Your guide changed" message when a reflection updates the board, and autosave every text field so going back never loses work.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>White Box is designed for students to use artificial intelligence responsibly and develop AI literacy through interactive guided lessons. We formulated key AI literacy information into short, bite-sized lessons chunked into learning, doing, and reflecting. Our map guides students through each lesson, giving students a fun and illustrative path that immerses students into each lesson.</p>
+<p>In this stage, we turned our conceptual design into a working, high-fidelity prototype for grade 10 students. It includes a Values Studio, a learning map with three missions, three hands-on lessons that show how chatbots, classifiers and image generators work, three cases on hallucination, bias and deepfakes, and a reflection that feeds into each student's personal AI guide. The AI portion is integrated with the interface: a live LLM plays the case characters within strict, scripted limits, and transparent simulations show how each type of AI produces its output. A heuristic evaluation and a student walkthrough showed that the core loop is clear and the cases are engaging, but that the platform needs better onboarding, clearer signals about when AI replies are live or scripted, and the privacy safeguards we promised.</p>
+<p>Next, we would make the recommended changes, focus on the visual design of White Box, and run usability testing with a larger group of grade 10 students and their teachers. We would also build the parts of our conceptual design that this prototype left out: the grade 3 version for younger students like Maya, the teacher dashboard with controls for live AI, and parent consent.</p>
+<h2>References</h2>
+<p>Long, D., &amp; Magerko, B. (2020, April). What is AI literacy? Competencies and design considerations. In Proceedings of the 2020 CHI conference on human factors in computing systems (pp. 1-16).</p>
+<p>Mollick, E., Mollick, L., Bach, N., Ciccarelli, L. J., Przystanski, B., &amp; Ravipinto, D. (2024). AI agents and education: Simulated practice at scale (arXiv:2407.12796). arXiv. https://arxiv.org/abs/2407.12796</p>
+<p>Nielsen, J. (1994). 10 usability heuristics for user interface design. Nielsen Norman Group. https://www.nngroup.com/articles/ten-usability-heuristics/</p>
+<p>OpenAI. (2025). Why language models hallucinate. https://openai.com/index/why-language-models-hallucinate/</p></body></html>
