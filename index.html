@@ -954,6 +954,13 @@ ins.anim{animation:insIn .5s .35s ease-out both}@keyframes insIn{from{opacity:0;
 </head>
 <body>
 <div id="app"></div>
+<!-- Inside the machine: deep-dive lessons on how language models work (see machine/) -->
+<link rel="stylesheet" href="machine/machine.css">
+<script src="machine/data.js"></script>
+<script src="machine/model.js"></script>
+<script src="machine/scene3d.js"></script>
+<script src="machine/machine.js"></script>
+<script src="machine/lessons.js"></script>
 <script>
 (function(){
 'use strict';
@@ -1674,7 +1681,7 @@ ACT.resetAll=()=>{if(!S.confirmReset){S.confirmReset=true;render();return}
 
 /* ---------- shell ---------- */
 const NAV=[['home','Map','M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15'],['values','Values Studio','M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM15.5 8.5l-2 5-5 2 2-5z','Values'],['lessons','Lessons','M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5'],['cases','Cases','M4 7h16v12H4zM9 7V5h6v2'],['guide','My Guide','M6 3h11l3 3v15H6zM9 9h7M9 13h7M9 17h4','Guide'],['journey','Journey','M4 20l5-8 4 5 3-4 4 7zM12 4a2 2 0 1 0 0 .1']];
-function navSection(sc){if(sc==='settings')return 'settings';if(['home','mission'].includes(sc))return 'home';if(['values','value'].includes(sc))return 'values';if(['lessons','l1','l2','l3'].includes(sc))return 'lessons';if(sc==='guide')return 'guide';if(sc==='journey'||sc==='passport')return 'journey';if(sc==='reflect')return 'home';return 'cases'}
+function navSection(sc){if(sc==='settings')return 'settings';if(['home','mission'].includes(sc))return 'home';if(['values','value'].includes(sc))return 'values';if(['lessons','l1','l2','l3','mx'].includes(sc))return 'lessons';if(sc==='guide')return 'guide';if(sc==='journey'||sc==='passport')return 'journey';if(sc==='reflect')return 'home';return 'cases'}
 const LVLS=[[0,'Level 1'],[60,'Level 2'],[150,'Level 3'],[260,'Level 4'],[400,'Level 5']];
 function lvl(){const x=S.cred;let i=0;while(i<LVLS.length-1&&x>=LVLS[i+1][0])i++;const lo=LVLS[i][0],hi=(LVLS[i+1]||[lo+1])[0];return{name:LVLS[i][1],pct:i===LVLS.length-1?100:Math.round((x-lo)/(hi-lo)*100)}}
 function shell(inner){const cur=navSection(S.screen);
@@ -1811,6 +1818,7 @@ function mission(){
     ${!un?`<div class="card fbk">Locked. ${m.n===1?'Save at least 3 values in the Values Studio first.':'Finish Mission '+(m.n-1)+' to unlock this one.'}</div>`:''}
     <section class="stack" style="gap:12px">
       ${step(1,'Lesson · '+m.lname,'About 8 min',st.lesson,m.lesson,'Start lesson',!un?'Locked':'')}
+      ${window.MX&&un?MX.missionHTML(m.n):''}
       ${step(2,'Case · '+m.title,'About 20 min',st.case,'case:'+m.case,S.started[m.case]&&!st.case?'Continue':'Open case',!un?'Locked':'')}
       ${step(3,'Reflect','About 5 min',st.reflect,'reflect/'+m.n,'Reflect',!un?'Locked':!st.case?'After the case':'')}
     </section>
@@ -1821,6 +1829,7 @@ function mission(){
 function lessons(){
   return `<main class="pg">${pageHead('Lessons','How AI works, hands-on.')}
     <div class="libgrid">${MISSIONS.map(m=>{const un=msUnlocked(m.n);const d=MS(m.n).lesson;return `<button class="libcard ${un?'':'locked'}" data-act="${un?'go':'lockedMsg'}" data-arg="${un?m.lesson:m.n}"><div class="libart l${m.n}">${LESSON_ART[m.n-1]}</div><div class="stack" style="gap:6px;padding:16px 18px 18px"><span class="kicker">MISSION ${m.n} · LESSON</span><strong style="font-size:20px">${m.lname}</strong><span class="muted">${m.lsub}</span><span class="vgo">${!un?'<svg class="lk" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Locked':d?'✓ Done · Revisit':'Start →'}</span></div></button>`}).join('')}</div>
+    ${window.MX?MX.libraryHTML():''}
   </main>`}
 const LESSON_ART_V1=[`<div class="la1"><span>I</span><span>like</span><span>to</span><span>eat</span><span class="q">pizza?</span></div>`,`<div class="la2">${Array.from({length:18},(_,i)=>`<i class="${[0,1,3,4,6,9,12,15].includes(i)?'h':''}"></i>`).join('')}</div>`,`<div class="la3">${Array.from({length:64},(_,i)=>{const x=i%8,y=Math.floor(i/8);const d=Math.hypot(x-3.5,y-3.5);return `<i style="opacity:${d<3.3?0.95:0.25+((i*37)%10)/20}"></i>`}).join('')}</div>`];
 const LESSON_ART=[
@@ -1892,7 +1901,7 @@ function modalHTML(){const M=S.modal;if(!M)return '';
   const conf='';const _c=Array.from({length:0},(_,i)=>`<i style="--x:${(i*53)%100}%;--d:${(i%6)*0.12}s;--c:${['#FFC845','#FF8A3D','#3355E0','#2BB58A','#7B61FF','#FF6B6B'][i%6]}"></i>`).join('');
   return `<div class="mback" data-act="closeModal"><div class="modal" data-act="noop" role="dialog" aria-modal="true" aria-labelledby="mtitle"><div class="confetti" aria-hidden="true">${conf}</div>${BADGE[M.icon]?`<img class="mbadge-img" src="assets/${BADGE[M.icon]}.webp" width="104" height="104" alt="">`:`<span class="mbadge" aria-hidden="true">${M.icon}</span>`}<span class="kicker" style="color:var(--blue)">${M.kicker}</span><h2 id="mtitle" class="mtitle">${M.title}</h2><p class="muted" style="font-size:16px">${M.body}</p>${M.extra||''}<div class="mrow">${M.sec?`<button class="btn btn-ghost" data-act="modalGo" data-arg="${M.sec[1]}">${M.sec[0]}</button>`:''}<button class="btn btn-primary" data-act="modalGo" data-arg="${M.cta[1]}">${M.cta[0]} →</button></div><button class="mclose" data-act="closeModal" aria-label="Close">✕</button></div></div>`}
 function pageTitle(){const sc=S.screen;const m=MISSIONS[(+S.param||1)-1];
-  const T={settings:'Settings',home:'Map',values:'Values Studio',value:(VALUES[S.param]||{}).name||'Values',guide:'My Guide',mission:m?'Mission '+m.n+': '+m.title:'Mission',lessons:'Lessons',cases:'Cases',reflect:m?'Reflect · Mission '+m.n:'Reflect',journey:'Journey',l1:MISSIONS[0].lname,l2:MISSIONS[1].lname,l3:MISSIONS[2].lname};
+  const T={settings:'Settings',home:'Map',values:'Values Studio',value:(VALUES[S.param]||{}).name||'Values',guide:'My Guide',mission:m?'Mission '+m.n+': '+m.title:'Mission',lessons:'Lessons',mx:window.MX?MX.title():'Inside the machine',cases:'Cases',reflect:m?'Reflect · Mission '+m.n:'Reflect',journey:'Journey',l1:MISSIONS[0].lname,l2:MISSIONS[1].lname,l3:MISSIONS[2].lname};
   if(T[sc])return T[sc];const k=CASE_ORDER.find(k=>CASES[k].screens.includes(sc));if(k){const C=CASES[k];return C.title+' · '+C.names[C.screens.indexOf(sc)]}return 'White Box'}
 
 ACT.toggleUnlock=()=>{S.unlockAll=!S.unlockAll;S.toast=S.unlockAll?'Test mode on: everything unlocked':'Test mode off';render()};
@@ -1917,6 +1926,7 @@ function journey(){
         <div class="row" style="justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:nowrap"><div class="stack" style="gap:4px"><span class="kicker">MISSION ${m.n} · ${m.topic.toUpperCase()}</span><strong style="font-size:19px">${un?'':'<svg class="lk" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> '}${m.title}</strong></div>${st.reflect?'<img src="assets/b_flag.webp" width="48" height="48" alt="Completed">':''}</div>
         <div class="jparts">${[['Lesson',st.lesson],['Case',st.case],['Reflect',st.reflect]].map(p=>`<span class="${p[1]?'on':''}">${p[1]?'✓':'○'} ${p[0]}</span>`).join('')}</div></button>`}).join('')}</div>
     </section>
+    ${window.MX?MX.journeyHTML():''}
     ${Object.keys(S.rules||{}).length?`<section class="card stack" style="gap:10px"><h2 style="font-size:20px">My AI rules</h2>${CASE_ORDER.filter(k=>S.rules[k]).map(k=>`<div class="stack" style="gap:2px;padding:10px 12px;border-radius:10px;background:var(--bg)"><span class="kicker">${CASES[k].title}</span><span>${esc(S.rules[k].text)}</span></div>`).join('')}</section>`:''}
     ${(()=>{const c=curMission();return c?`<div><button class="btn btn-primary" data-act="go" data-arg="mission/${c.n}">Continue Mission ${c.n}: ${c.title} →</button></div>`:''})()}
   </main>`}
@@ -2808,11 +2818,13 @@ function render(){
   if(S.screen==='d_chat'){const el=document.getElementById('gcbody');if(el)el.scrollTop=el.scrollHeight}
   if(id){const el=document.getElementById(id);if(el){el.focus({preventScroll:true});if(s0!=null&&el.setSelectionRange){try{el.setSelectionRange(s0,s1)}catch(e){}}}}
   if(S.modal){const b=document.querySelector('.modal .btn-primary');if(b)b.focus({preventScroll:true})}
+  if(window.MX&&MX.afterRender)MX.afterRender();
   const ms=document.getElementById('mapscroll');if(ms&&ms.scrollWidth>ms.clientWidth){const h=ms.querySelector('.here .pin,.mnode.here');if(h){const r=h.getBoundingClientRect(),R=ms.getBoundingClientRect();ms.scrollLeft+=r.left-R.left-R.width/2+r.width/2}}
   saveState();
 }
 app.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.disabled)return;const f=ACT[b.dataset.act];if(f){e.preventDefault();f(b.dataset.arg)}});
 app.addEventListener('submit',e=>{e.preventDefault();const f=e.target.dataset.form;
+  if(f&&f.startsWith('mx')&&window.MX){MX.onSubmit(f,e.target);return}
   if(f==='name'){const v=e.target.querySelector('#nm').value.trim();if(v){S.name=v.slice(0,24);S.toast='Name saved';render()}else{const i=e.target.querySelector('#nm');i.focus();i.setAttribute('aria-invalid','true')}return}
   if(f==='chat')onChatSubmit(e.target);
   else if(f==='bsearch'){const q=e.target.querySelector('#bq').value.trim();if(q)openPage('search:'+q)}
@@ -2820,9 +2832,10 @@ app.addEventListener('submit',e=>{e.preventDefault();const f=e.target.dataset.fo
   else if(f==='cown'){const inp=e.target.querySelector('#cown');const t=inp.value.trim();if(!t)return;inp.value='';liveAskPerson(curConvo(),LIVE_CTX.convo,t)}
   else if(f==='own'){const inp=e.target.querySelector('#own');const t=inp.value.trim();if(!t)return;inp.value='';liveAskPerson(S.d,LIVE_CTX.decide,t)}
 });
-app.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.input;if(k==='nwT'||k==='l3t')render()});
+app.addEventListener('change',e=>{const k=e.target.dataset&&e.target.dataset.input;if(k==='nwT'||k==='l3t')render();else if(k&&k.startsWith('mx:')&&window.MX)MX.onChange(k,e.target)});
 app.addEventListener('scroll',e=>{if(e.target&&e.target.id==='prompt')syncBack()},true);
 app.addEventListener('input',e=>{const k=e.target.dataset.input;if(!k)return;
+  if(k.startsWith('mx:')&&window.MX){MX.onInput(k,e.target);return}
   if(k.startsWith('v:')){const [,vk,f]=k.split(':');(S.vdraft[vk]=S.vdraft[vk]||{me:'',ai:''})[f]=e.target.value;saveState();return}
   if(k.startsWith('r:')){const [,n,f]=k.split(':');S.rf[n][f]=e.target.value;saveState();return}
   if(k==='nwT'){const L=LS('l1');L.T=parseFloat(e.target.value);L.Tmoved=true;const P=nwProbs(NW[L.set],L.T);document.querySelectorAll('.nwb').forEach((el,i)=>{el.querySelector('i').style.width=(P[i]*100).toFixed(1)+'%';el.querySelector('b').textContent=Math.round(P[i]*100)+'%'});const lb=e.target.closest('.tslide').querySelector('b');if(lb)lb.textContent=L.T.toFixed(1);return}
@@ -2839,6 +2852,9 @@ document.addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[role=button][data-act]:not(button)')){e.preventDefault();const f=ACT[e.target.dataset.act];if(f)f(e.target.dataset.arg)}
   if(e.key==='Tab'&&S.modal){const f=[...document.querySelectorAll('.modal button')];if(!f.length)return;const i=f.indexOf(document.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}}
 });
+/* bridge for Inside the machine (machine/machine.js): it registers its own view and actions here */
+window.WB={S,ACT,VIEWS,render,go,esc,get SAMPLE(){return SAMPLE}};
+if(window.MX&&MX.init)MX.init(window.WB);
 const FRESH_ALL=JSON.stringify(S,(k,v)=>k==='tm'?undefined:v);const FRESH4=JSON.stringify({c:S.c,v:S.v,d:S.d,p:S.p,vote:S.vote});CASES.c4.reset=()=>{Object.assign(S,JSON.parse(FRESH4))};
 loadState();livePendingFix();S.toast=null;S.modal=null;fromHash();render();
 })();
