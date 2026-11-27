@@ -51,8 +51,15 @@ Each lesson is a set of guided steps next to a **3D model** of a real small lang
 
 Files: `machine/` (`machine.js` core, `lessons.js` lesson content, `scene3d.js` 3D model, `model.js` live model, `data.js` recorded runs, `vendor/` three.js r187, MIT license).
 
+## Design
+
+White Box uses **Material Design 3** with its own theme: black and white, with sun yellow (`#FFC845`) as the only accent color. The theme includes Roboto Flex for text, Material Symbols for icons, a line-art box logo, an opening animation, and fixes for contrast and spacing. On phones, the main pages (Map, Values, Lessons, Cases, Guide, Journey) sit in a bottom navigation bar.
+
+The theme is already built into `index.html`, so nothing extra is needed to run it. The source files are in `design/`, so the theme can be read, changed or rebuilt. See [design/README.md](design/README.md) for how to rebuild it.
+
 ## What's in this repository
 
 - `index.html`: the whole platform in one file
 - `assets/`: character, value and map images
 - `machine/`: the Inside the machine lessons (3D model, live model, lesson content)
+- `design/`: source files for the Material Design 3 theme (`m3.css`, `mono.css`, `logo.css`, `build.py`)
