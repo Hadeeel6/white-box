@@ -1,0 +1,211 @@
+<style id="mono">
+/* ===== White Box monochrome theme (on top of the Material 3 layer) =====
+   Black and white carry the brand. Sun (#FFC845) is the one pop of color: the logo's light,
+   the "Up next" action, the current step and XP. Value colors and feedback colors stay. */
+:root{
+  --md-primary:#1B1B1B;--md-on-primary:#FFFFFF;--md-primary-container:#EBEBEB;--md-on-primary-container:#1B1B1B;
+  --md-secondary:#5E5E5E;--md-secondary-container:#E9E9E9;--md-on-secondary-container:#1B1B1B;
+  --md-surface:#FCFCFC;--md-surface-dim:#DADADA;
+  --md-surface-container-lowest:#FFFFFF;--md-surface-container-low:#F6F6F6;--md-surface-container:#F0F0F0;
+  --md-surface-container-high:#EAEAEA;--md-surface-container-highest:#E3E3E3;
+  --md-on-surface:#1B1B1B;--md-on-surface-variant:#474747;--md-outline:#767676;--md-outline-variant:#D4D4D4;
+  --md-inverse-surface:#2F2F2F;--md-inverse-on-surface:#F1F1F1;--md-inverse-primary:#FFFFFF;
+  --sun:#FFC845;--sun-ink:#3D2E00;--sun-soft:#FFF3D1;--tang:#FFC845;
+  --mute:#5D5D5D;--line2:#8F8F8F;--blue-d:#000000;--blue-t:#F3F3F3;--blue-b:#8F8F8F;
+  --wb-bg:#1B1B1B;--wb-line:#FFFFFF;--wb-glow:#FFC845;
+}
+::selection{background:var(--sun);color:#1B1B1B}
+
+/* Up next: black card, sun action */
+.nextcard{background:#1B1B1B!important;color:#fff}
+.nextcard .nc-tag{color:var(--sun)!important}
+.nextcard .nc-title{color:#fff}
+.nextcard .nc-sub{color:#CFCFCF}
+.nextcard .nc-steps b{color:#A8A8A8}.nextcard .nc-steps b.now{color:#fff}.nextcard .nc-steps em{color:#CFCFCF}
+.nc-steps span{border-color:#5A5A5A;background:transparent;color:#BDBDBD}
+.nc-steps span.on{background:#fff;border-color:#fff;color:#1B1B1B}
+.nc-steps span.now{background:var(--sun);border-color:var(--sun);color:#1B1B1B}
+.nextcard .btn-primary{background:var(--sun)!important;border-color:var(--sun)!important;color:#1B1B1B!important}
+.nextcard .btn-primary:hover:not(:disabled){background:#FFD466!important}
+
+/* progress: current step in sun */
+.prog-track span{background:#E3E3E3}.prog-track span.done{background:#1B1B1B}.prog-track span.now{background:var(--sun)}
+.l6prog i{background:#E3E3E3}.l6prog .done i{background:#1B1B1B}.l6prog .now i{background:var(--sun)}
+.xpbar{background:#E3E3E3}.xpbar b{background:var(--sun)}
+.jbar{background:#E3E3E3}.jbar i{background:var(--sun)}
+
+/* map: black outline on "you are here" */
+.mapkey .kdot{background:#1B1B1B!important}
+
+/* lessons (dark): white primary, sun accent */
+.l6.dark .l6card{background:#1B1B1B;border-color:#1B1B1B}
+.l6.dark .lcard,.l6.dark .l6q,.l6.dark .l6opt,.l6.dark .l6w,.l6.dark .qopt{background:#262626;border-color:#454545}
+.l6.dark .btn-primary{background:#FFFFFF!important;border-color:#FFFFFF!important;color:#1B1B1B!important}
+.l6.dark .btn-ghost{color:#FFFFFF!important;border-color:#8A8A8A!important}
+.l6.dark .l6opt.on{background:#FFFFFF;color:#1B1B1B}
+.l6.dark .l6take{background:rgba(255,200,69,.12);color:#FFE7A8}.l6.dark .l6take .kicker{color:var(--sun)!important}
+.l6.dark .tog .sw{background:#454545!important;box-shadow:inset 0 0 0 2px #8A8A8A}
+.l6.dark .tog.on .sw{background:var(--sun)!important;box-shadow:none}
+.l6.dark .tog.on .sw i{background:#1B1B1B!important}
+.l6.dark .l6w.glow{color:#1B1B1B}
+
+/* text links become Material 3 buttons */
+.linkbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border-radius:var(--md-shape-full);border:none;background:var(--md-secondary-container);color:var(--md-on-secondary-container);font:inherit;font-size:14px;font-weight:500;letter-spacing:.01em;text-decoration:none;vertical-align:middle;transition:background-color var(--md-dur) var(--md-ease)}
+.linkbtn:hover{background:color-mix(in srgb,var(--md-on-secondary-container) 8%,var(--md-secondary-container));text-decoration:none}
+.linkbtn[data-act=go]::after{content:'arrow_forward';font-family:'Material Symbols Rounded';font-size:18px;font-weight:normal;line-height:1;font-feature-settings:'liga';-webkit-font-feature-settings:'liga'}
+.linkbtn[data-act=cancelReset]{background:transparent;color:var(--md-primary);border:1px solid var(--md-outline)}
+.linkbtn[data-act=pickFact],.linkbtn[data-act=r3Redo]{min-height:32px;padding:0 12px;font-size:13px}
+.card.muted{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.crumb{display:inline-flex;align-items:center;gap:4px;min-height:40px;padding:0 16px 0 10px;color:var(--md-on-surface);text-decoration:none}
+.crumb:hover{background:color-mix(in srgb,var(--md-on-surface) 8%,transparent);text-decoration:none}
+
+/* icon font wins over the older .me span font rule */
+.me .msym,.gear .msym{font-family:'Material Symbols Rounded'!important;font-size:20px!important;color:var(--md-on-surface-variant)}
+.gear.on .msym{color:var(--md-on-surface)}
+
+/* sidebar logo wordmark */
+.logo{font-weight:600;letter-spacing:-.01em}
+
+
+/* ===== contrast pass ===== */
+/* sun only reads on dark; on light surfaces the current step gets a black edge (3:1 for UI parts) */
+.prog-track span.now,.l6prog .now i{background:var(--sun);box-shadow:inset 0 0 0 1px #1B1B1B}
+.l6prog i{height:6px!important}.l6prog .now{color:#1B1B1B!important;font-weight:700}
+.l6prog button:disabled{color:#767676}
+.xpbar{box-shadow:inset 0 0 0 1px #BDBDBD}
+/* the step bar sits on the light page, above the dark lesson card */
+.l6.dark .l6prog i,.l6 .l6prog i{background:#E3E3E3!important}
+.l6.dark .l6prog .done i,.l6 .l6prog .done i{background:#1B1B1B!important}
+.l6.dark .l6prog .now i,.l6 .l6prog .now i{background:var(--sun)!important;box-shadow:inset 0 0 0 1px #1B1B1B}
+.l6prog button{color:#5D5D5D}
+
+/* lesson dark surface: M3 dark neutral roles */
+.l6.dark .l6card{color:#E3E3E3}
+.l6.dark .l6h,.l6.dark strong{color:#FFFFFF!important}
+.l6.dark .l6p,.l6.dark .muted,.l6.dark .l6bar em{color:#C4C4C4!important}
+.l6.dark .l6opt,.l6.dark .l6w,.l6.dark .qopt{background:#262626!important;border:1px solid #8A8A8A!important;color:#EDEDED!important}
+.l6.dark .l6opt:hover,.l6.dark .l6w:hover:not(:disabled),.l6.dark .qopt:hover:not(:disabled){background:#333333!important;border-color:#C4C4C4!important}
+.l6.dark .l6opt.on{background:#FFFFFF!important;color:#1B1B1B!important;border-color:#FFFFFF!important}
+.l6.dark .l6opt.right,.l6.dark .qopt.right{background:rgba(110,231,183,.14)!important;border-color:#6EE7B7!important;color:#A7F3D0!important}
+.l6.dark .l6opt.wrong,.l6.dark .qopt.wrongv{background:rgba(255,154,157,.14)!important;border-color:#FF9A9D!important;color:#FFC9CA!important}
+.l6.dark .l6w.it{background:rgba(255,200,69,.16)!important;border-color:var(--sun)!important;color:#FFE7A8!important}
+.l6.dark .l6w.glow{background:var(--sun)!important;border-color:var(--sun)!important;color:#1B1B1B!important}
+.l6.dark .l6w.miss{border-color:#FF9A9D!important;color:#FFC9CA!important}
+.l6.dark .l6bar i{background:#3A3A3A}.l6.dark .l6bar b{background:#A8A8A8}.l6.dark .l6bar.hi b{background:var(--sun)}
+.l6.dark .l6bar span{color:#EDEDED!important}
+.l6.dark .l6blank{border-bottom:2px dashed #A8A8A8;color:#C4C4C4}.l6.dark .l6blank.on{color:#FFFFFF;border-bottom-color:var(--sun)}
+.l6.dark .l6run,.l6.dark .l6ans{background:#2A2A2A!important;color:#EDEDED!important}
+.l6.dark .l6q,.l6.dark .lcard{background:#232323!important;border:1px solid #5A5A5A!important}
+.l6.dark .l6nav{border-top:1px solid #444444}
+.l6.dark .l6check{border:1px dashed #8A8A8A}.l6.dark .l6check .ok{color:#A7F3D0}
+.l6.dark .fbk{background:rgba(255,200,69,.12)!important;color:#FFE7A8!important}.l6.dark .fbk.ok{background:rgba(110,231,183,.12)!important;color:#A7F3D0!important}
+.l6.dark .tog{background:#262626!important;border:1px solid #8A8A8A!important;color:#EDEDED!important}
+.l6.dark .tog:hover{border-color:#C4C4C4!important}.l6.dark .tog.on{border-color:var(--sun)!important}
+.l6.dark .deeper{border:1px solid #5A5A5A!important;color:#D6D6D6}.l6.dark .deeper summary{color:var(--sun)!important}
+.l6.dark .btn-ghost{background:transparent!important;color:#FFFFFF!important;border:1px solid #8A8A8A!important}
+.l6.dark .btn-ghost:hover:not(:disabled){background:rgba(255,255,255,.08)!important}
+.l6.dark .btn:disabled{background:rgba(255,255,255,.12)!important;color:rgba(255,255,255,.5)!important}
+.l6.dark .crumb,.l6 .crumb{color:var(--md-on-surface)}
+.chip.labchip{background:#262626;border:1px solid #8A8A8A;color:#EDEDED}.chip.labchip.on{background:var(--sun)!important;color:#1B1B1B!important;border-color:var(--sun)!important}
+.tf{border-width:1px}.tf b{color:#D6D6D6}
+.tokw{border-color:#8A8A8A}
+
+
+/* ===== spacing and alignment pass (M3: 8px between chips and buttons, 16px between groups) ===== */
+.row:has(>.chip),.row:has(>.rchip),.row:has(>.tagb),.row:has(>.vpb),.rchips,.l6opts,.sortopts{column-gap:8px!important;row-gap:8px!important}
+form[data-form]{gap:8px!important;align-items:center}
+.apptabs{gap:8px}
+.rnav,.l6nav,.mrow,.again-h{gap:12px}
+.rnav{align-items:center}
+.mstep>.btn,.rnav .btn,.l6nav .btn,.setrow>.btn,.mdone>.btn{flex:0 0 auto}
+
+/* tappable words in a draft flow as text, not as separate blocks */
+.tok{cursor:pointer;display:inline;text-align:left;white-space:normal;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:2px 3px}
+
+span.tok:focus-visible{outline:3px solid var(--md-primary);outline-offset:2px;border-radius:5px}
+
+/* icon buttons use Material Symbols instead of text glyphs */
+.iconb{font-size:0!important;display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px}
+.iconb::before{font-family:'Material Symbols Rounded';font-size:20px;line-height:1;font-feature-settings:'liga';-webkit-font-feature-settings:'liga';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20}
+.iconb[data-arg$="|-1"]::before{content:'arrow_upward'}
+.iconb[data-arg$="|1"]::before{content:'arrow_downward'}
+.iconb[aria-label^="Edit"]::before{content:'edit'}
+.iconb[aria-label^="Remove"]::before{content:'close'}
+
+/* value board cards: number, content, actions on a grid so nothing collides */
+.bcard{display:grid!important;grid-template-columns:36px minmax(0,1fr) auto;column-gap:16px;row-gap:8px;align-items:start}
+.bcard>.stack{min-width:0}
+.bact{gap:4px}
+@media (max-width:640px){
+  .bcard{grid-template-columns:36px minmax(0,1fr)}
+  .bact{grid-column:1/-1;justify-content:flex-end;border-top:1px solid var(--md-outline-variant);padding-top:8px}
+}
+
+/* reflect ranking rows */
+.rrow{gap:8px}.rrow .iconb{flex-basis:40px}
+
+/* case header on phones: back + progress on one line */
+@media (max-width:720px){
+  .content>.topbar{flex-wrap:nowrap;gap:12px}
+  .topbar>div:first-child{flex:0 0 auto}
+  .topbar .back{width:40px;min-height:40px;padding:0;justify-content:center;font-size:0}
+  .topbar .back .msym{font-size:22px}
+  .topbar .prog{flex:1 1 auto;min-width:0;align-items:stretch}
+  .topbar .prog-label{text-align:left}
+  .topbar .rank{display:none}
+  .row>aside.card{max-width:none!important}
+  .row>aside.stack{max-width:none!important}
+}
+
+
+/* interactive outlines use M3 "outline" (3:1+), containers keep "outline-variant" */
+.opt,.qopt,.sopt,.act,.vpb,.feel,.r3opt,.addb,.rchip,.tagb,.swapb,.chip,.verd:not(:disabled){border-color:var(--md-outline)}
+.opt.on,.act.on,.vpb.on,.feel.on{border-color:var(--md-primary)!important}
+.r3opt:hover,.opt:hover,.vpb:hover,.feel:hover{border-color:var(--md-on-surface)}
+.chip.on[data-act=view]{background:var(--md-primary)!important;color:var(--md-on-primary)!important}
+.l6.dark .deeper p{color:#D6D6D6}
+
+
+/* sliders on the dark lesson card: sun knob on a visible track */
+.l6.dark input[type=range]{accent-color:var(--sun);-webkit-appearance:none;appearance:none;height:28px;background:transparent}
+.l6.dark input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:999px;background:#6E6E6E}
+.l6.dark input[type=range]::-moz-range-track{height:4px;border-radius:999px;background:#6E6E6E}
+.l6.dark input[type=range]::-moz-range-progress{height:4px;border-radius:999px;background:var(--sun)}
+.l6.dark input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-9px;border-radius:50%;background:var(--sun);border:2px solid #FFFFFF;box-shadow:0 0 0 1px #1B1B1B}
+.l6.dark input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--sun);border:2px solid #FFFFFF}
+.l6.dark input[type=range]:focus-visible{outline:2px solid #FFFFFF;outline-offset:4px;border-radius:8px}
+.l6.dark .stepdots i{background:#6E6E6E}.l6.dark .stepdots i.on{background:var(--sun)}
+.l6.dark .tslide{color:#D6D6D6}.l6.dark .tslide b{color:#FFFFFF}
+.l6.dark .facebox{border-color:#6E6E6E}
+
+/* offline or slow: hide icon-font words until the font has loaded */
+html:not(.msym-ok) .msym,html:not(.msym-ok) .iconb::before,html:not(.msym-ok) .linkbtn[data-act=go]::after{color:transparent!important}
+
+/* ===== opening animation: the box opens, then the platform appears ===== */
+#wb-splash{position:fixed;inset:0;z-index:200;background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;animation:spOut .45s 2.05s cubic-bezier(.2,0,0,1) forwards;cursor:pointer}
+#wb-splash.skip{animation:spOut .25s ease-out forwards}
+#wb-splash .sp-art{position:relative;width:132px;height:132px;display:grid;place-items:center}
+#wb-splash .sp-burst{position:absolute;left:50%;top:44%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:var(--sun);opacity:0;transform:scale(0);animation:spBurst .9s 1s cubic-bezier(.2,0,0,1) forwards}
+#wb-splash svg{position:relative;overflow:visible}
+#wb-splash svg path{stroke:#1B1B1B;stroke-width:1.15;stroke-linejoin:round;stroke-linecap:round;fill:none}
+#wb-splash .sp-body{stroke-dasharray:1;stroke-dashoffset:1;animation:spDraw .6s .1s cubic-bezier(.4,0,.2,1) forwards}
+#wb-splash .sp-glow{fill:var(--sun)!important;stroke:none!important;opacity:0;animation:spFade .35s .95s ease-out forwards}
+#wb-splash .sp-lid{transform-origin:3px 7px;opacity:0;animation:spLidIn .25s .5s ease-out forwards,spLidOpen .55s .8s cubic-bezier(.3,1.5,.5,1) forwards}
+#wb-splash .sp-lid path{fill:#FFFFFF}
+#wb-splash .sp-spark{fill:var(--sun)!important;stroke:#1B1B1B!important;stroke-width:.5!important;transform-origin:4.4px 2.4px;transform:scale(0);animation:spSpark .5s 1.2s cubic-bezier(.3,1.6,.5,1) forwards}
+#wb-splash .sp-word{font-family:'Roboto Flex','Roboto',system-ui,sans-serif;font-size:28px;font-weight:600;letter-spacing:-.01em;color:#1B1B1B;opacity:0;transform:translateY(6px);animation:spWord .45s 1.25s cubic-bezier(.2,0,0,1) forwards}
+@keyframes spDraw{to{stroke-dashoffset:0}}
+@keyframes spFade{to{opacity:1}}
+@keyframes spLidIn{to{opacity:1}}
+@keyframes spLidOpen{from{transform:none}to{transform:translateY(-1.2px) rotate(-24deg)}}
+@keyframes spSpark{to{transform:scale(1)}}
+@keyframes spBurst{0%{opacity:.55;transform:scale(0)}100%{opacity:0;transform:scale(1.9)}}
+@keyframes spWord{to{opacity:1;transform:none}}
+@keyframes spOut{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){
+  #wb-splash,#wb-splash *{animation:none!important}
+  #wb-splash .sp-body{stroke-dashoffset:0}#wb-splash .sp-glow,#wb-splash .sp-word{opacity:1;transform:none}
+  #wb-splash .sp-lid{opacity:1;transform:translateY(-1.2px) rotate(-24deg)}#wb-splash .sp-spark{transform:none}
+  #wb-splash{animation:spOut .3s .9s linear forwards!important}
+}
+</style>
