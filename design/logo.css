@@ -1,0 +1,15 @@
+<style id="wb-logo">
+/* White Box mark: the original line-drawn cube, lid resting a little open, a spark of light. */
+.logo-mark{width:40px;height:40px;border-radius:12px;background:var(--wb-bg,#1B1B1B);display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;box-shadow:none!important;transform:none!important}
+button.logo:hover .logo-mark{transform:none!important}
+.wb-logo{display:block;overflow:visible}
+.wb-logo path{fill:none;stroke:var(--wb-line,#fff);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.wb-lid{transform-origin:3px 7px;transform:translateY(-1px) rotate(-11deg)}
+.wb-lid path{fill:var(--wb-bg,#1B1B1B)}
+.wb-spark{fill:var(--wb-glow,#FFC845)!important;stroke:none!important;transform-origin:4.4px 2.4px}
+button.logo:hover .wb-lid,button.logo:focus-visible .wb-lid{animation:wbPeek .8s cubic-bezier(.2,0,0,1)}
+button.logo:hover .wb-spark,button.logo:focus-visible .wb-spark{animation:wbTwinkle .8s ease-in-out}
+@keyframes wbPeek{0%{transform:translateY(-1px) rotate(-11deg)}30%{transform:none}70%{transform:translateY(-1.4px) rotate(-22deg)}100%{transform:translateY(-1px) rotate(-11deg)}}
+@keyframes wbTwinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.5) rotate(45deg)}}
+@media (prefers-reduced-motion:reduce){.wb-logo *{animation:none!important}}
+</style>
